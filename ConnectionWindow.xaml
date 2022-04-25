@@ -1,0 +1,35 @@
+﻿<Window x:Class="JobViewer.ConnectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JobViewer"
+        xmlns:properties="clr-namespace:JobViewer.Properties"
+        mc:Ignorable="d"
+        Title="Connect..." 
+        Height="120" Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="DataSource">
+            <TextBox 
+                Text="{Binding Source={x:Static properties:Settings.Default},
+                               Path=DataSource}" Height="25"/>
+        </GroupBox>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Margin="4"
+                Content="Cancel"  IsCancel="True" Width="75" DockPanel.Dock="Right"/>
+            <Button Grid.Column="2" Margin="4"
+                Content="Connect" IsDefault="True" Click="Connect_Click" Width="75" DockPanel.Dock="Right"/>
+        </Grid>
+        
+    </Grid>
+</Window>

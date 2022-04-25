@@ -1,0 +1,18 @@
+﻿<Window x:Class="JobViewer.DBObjectViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JobViewer"
+        xmlns:avalonEditor="clr-namespace:JobViewer.AvalonTextEditor"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" Height="450" Width="800">
+    <Grid>
+        <avalonEditor:AvalonTextEditor  
+                        x:Name="avalonEditCtrl"
+                        Grid.Column="2" Margin="4"
+                        TextSql="{Binding Path=TextSql}"
+                        DefaultSchemaName="{Binding Path=DefaultSchemaName}"
+                        />
+    </Grid>
+</Window>
