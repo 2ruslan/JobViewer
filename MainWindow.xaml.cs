@@ -1,20 +1,9 @@
 ﻿using JobViewer.Common;
+using JobViewer.Model;
 using ScottPlot;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace JobViewer
@@ -43,10 +32,13 @@ namespace JobViewer
         {
             InitializeComponent();
 
-            if (!ShowConnectionWindow())
+            var connection = GetDbConnection();
+
+            if (connection == null)
                 Application.Current.Shutdown();
 
-            DataContext = dataContext = new MainViewModel();
+            DataContext = dataContext = new MainViewModel(connection);
+
             dataContext.PropertyChanged += DataContextPropertyChanged;
         }
 
@@ -63,12 +55,23 @@ namespace JobViewer
             
         }
 
-
-        private bool ShowConnectionWindow()
+        private JobDbContext GetDbConnection()
         {
-            var connection = new ConnectionWindow();
-            connection.ShowDialog();
-            return connection.DialogResult ?? false;
+            var dlg = new ConnectionWindow();
+
+            dlg.ShowDialog();
+            if (!(dlg.DialogResult ?? false))
+                return null;
+            
+            var connection = new JobDbContext(dlg.GetConnectionString());
+
+            if (!connection.Database.CanConnect())
+            {
+                MessageBox.Show("Error connection!");
+                return GetDbConnection();
+            }
+
+            return connection;
         }
 
         private void PlotStatistic(WpfPlot plot, StatisticInfo info, bool isYDate = true)

@@ -121,10 +121,10 @@ namespace JobViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UseWindowsAutentification {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseWindowsAutentification {
             get {
-                return ((string)(this["UseWindowsAutentification"]));
+                return ((bool)(this["UseWindowsAutentification"]));
             }
             set {
                 this["UseWindowsAutentification"] = value;

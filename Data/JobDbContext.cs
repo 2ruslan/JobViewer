@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace JobViewer.Model
 {
@@ -12,20 +13,19 @@ namespace JobViewer.Model
         public DbSet<TextLine> TextLines { get; set; }
         public DbSet<DataBase> DataBases { get; set; }
 
+        private string connectionString;
+
+        public JobDbContext(string connectionString)
+            : base()
+        {
+            this.connectionString = connectionString;
+        }
+
         protected override void OnConfiguring(
            DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = $"data source={Properties.Settings.Default.DataSource};initial catalog = msdb; Integrated Security = SSPI;";
-
             optionsBuilder.UseSqlServer(connectionString);
-            optionsBuilder
-                .LogTo(OnDbError)
-                .EnableDetailedErrors(); 
-        }
-
-        private void OnDbError(string arg)
-        {
-            System.Diagnostics.Debug.WriteLine(arg);
+            optionsBuilder.EnableDetailedErrors(); 
         }
 
         public string SpHelpText(string dbName, string objName)

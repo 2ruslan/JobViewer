@@ -5,21 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobViewer"
         xmlns:properties="clr-namespace:JobViewer.Properties"
+        xmlns:converters="clr-namespace:JobViewer.Converters"
         mc:Ignorable="d"
         Title="Connect..." 
-        Height="120" Width="250">
+        Name="dlg"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Height"
+        Height="230" Width="340">
+
+    <Window.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="DataSource">
-            <TextBox 
-                Text="{Binding Source={x:Static properties:Settings.Default},
+            <TextBox Text="{Binding Source={x:Static properties:Settings.Default},
                                Path=DataSource}" Height="25"/>
         </GroupBox>
 
-        <Grid Grid.Row="1">
+        <GroupBox Grid.Row="1" Header="Authentication">
+            <StackPanel>
+                <RadioButton x:Name="WindowsAuthenticationCtrl" Grid.Row="1" GroupName="Authentication" Margin="10,0"
+                Content="Windows authentication"
+                />
+                <RadioButton x:Name="LoginAuthenticationCtrl" Grid.Row="1" GroupName="Authentication" Margin="10,0"
+                Content="Login/password authentication"
+                />
+            </StackPanel>
+        </GroupBox>
+        
+        <GroupBox Grid.Row="2" Header="User">
+            <TextBox Text="{Binding Source={x:Static properties:Settings.Default},
+                               Path=User}" Height="25"/>
+        </GroupBox>
+        <GroupBox Grid.Row="3" Header="Password">
+            <PasswordBox x:Name="PasswordBox" Height="25"/>
+        </GroupBox>
+
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>

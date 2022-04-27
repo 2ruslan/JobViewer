@@ -68,9 +68,9 @@ namespace JobViewer
 
         #endregion Props
 
-        public MainViewModel()
+        public MainViewModel(JobDbContext jobDbContext)
         {
-            JobDbContext = new JobDbContext();
+            JobDbContext = jobDbContext;
 
             Jobs = new NotifiedClass<Job>(OnCurrentJobChanged);
             JobSteps = new NotifiedClass<JobStep>(OnCurrentJobStepsChanged);

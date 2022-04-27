@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace JobViewer
 {
@@ -17,12 +8,32 @@ namespace JobViewer
         public ConnectionWindow()
         {
             InitializeComponent();
+
+            WindowsAuthenticationCtrl.IsChecked = Properties.Settings.Default.UseWindowsAutentification;
+            LoginAuthenticationCtrl.IsChecked = !WindowsAuthenticationCtrl.IsChecked;
+
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.UseWindowsAutentification = WindowsAuthenticationCtrl.IsChecked??false;
             Properties.Settings.Default.Save();
+
             this.DialogResult = true;
+        }
+
+        public string GetConnectionString()
+        {
+            var prop = Properties.Settings.Default;
+
+            var connectionString = new StringBuilder($"data source={prop.DataSource};initial catalog = msdb;");
+
+            if (prop.UseWindowsAutentification)
+                connectionString.Append("Integrated Security = SSPI;");
+            else
+                connectionString.Append($"User ID={prop.User};Password={PasswordBox.Password};");
+
+            return connectionString.ToString();
         }
     }
 }
