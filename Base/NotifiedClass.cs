@@ -34,6 +34,7 @@ namespace JobViewer.Base
 
         public NotifiedClass(Action a)
         {
+            Collection = new ObservableCollection<T>();
             onCurrentChanged = a;
         }
     }

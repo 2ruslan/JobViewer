@@ -11,7 +11,6 @@ namespace JobViewer
 
             WindowsAuthenticationCtrl.IsChecked = Properties.Settings.Default.UseWindowsAutentification;
             LoginAuthenticationCtrl.IsChecked = !WindowsAuthenticationCtrl.IsChecked;
-
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)

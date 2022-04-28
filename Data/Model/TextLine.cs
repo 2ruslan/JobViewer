@@ -6,9 +6,10 @@ using System.Text;
 
 namespace JobViewer.Model
 {
-    [NotMapped]
     public class TextLine
     {
+        [Key]   
+        [Column("text")]
         public string Text { get; set; }
     }
 }

@@ -25,7 +25,7 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="DataSource">
+        <GroupBox Grid.Row="0" Header="DataSource" Style="{DynamicResource MahApps.Styles.GroupBox.VisualStudio}">
             <TextBox Text="{Binding Source={x:Static properties:Settings.Default},
                                Path=DataSource}" Height="25"/>
         </GroupBox>
