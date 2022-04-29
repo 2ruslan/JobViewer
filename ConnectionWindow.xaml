@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobViewer"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:properties="clr-namespace:JobViewer.Properties"
         xmlns:converters="clr-namespace:JobViewer.Converters"
         mc:Ignorable="d"
@@ -25,31 +26,44 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="DataSource" Style="{DynamicResource MahApps.Styles.GroupBox.VisualStudio}">
+        <mah:MetroHeader Grid.Row="0" Margin="4"
+            mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                 mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
+                 Header="DataSource">
             <TextBox Text="{Binding Source={x:Static properties:Settings.Default},
                                Path=DataSource}" Height="25"/>
-        </GroupBox>
+        </mah:MetroHeader>
 
-        <GroupBox Grid.Row="1" Header="Authentication">
+        <mah:MetroHeader Grid.Row="1" Margin="4"
+            mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                 mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
+                 Header="Authentication">
             <StackPanel>
-                <RadioButton x:Name="WindowsAuthenticationCtrl" Grid.Row="1" GroupName="Authentication" Margin="10,0"
+                <RadioButton x:Name="WindowsAuthenticationCtrl" Grid.Row="1" GroupName="Authentication" Margin="10,2"
                 Content="Windows authentication"
                 />
-                <RadioButton x:Name="LoginAuthenticationCtrl" Grid.Row="1" GroupName="Authentication" Margin="10,0"
+                <RadioButton x:Name="LoginAuthenticationCtrl" Grid.Row="1" GroupName="Authentication" Margin="10,2"
                 Content="Login/password authentication"
                 />
             </StackPanel>
-        </GroupBox>
-        
-        <GroupBox Grid.Row="2" Header="User">
+        </mah:MetroHeader>
+
+        <mah:MetroHeader Grid.Row="2" Margin="4"
+            mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                 mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
+                 Header="User">
             <TextBox Text="{Binding Source={x:Static properties:Settings.Default},
                                Path=User}" Height="25"/>
-        </GroupBox>
-        <GroupBox Grid.Row="3" Header="Password">
-            <PasswordBox x:Name="PasswordBox" Height="25"/>
-        </GroupBox>
+        </mah:MetroHeader>
 
-        <Grid Grid.Row="4">
+        <mah:MetroHeader Grid.Row="3" Margin="4"
+            mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                 mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
+                 Header="Password">
+            <PasswordBox x:Name="PasswordBox" Height="25"/>
+        </mah:MetroHeader>
+
+        <Grid Grid.Row="4" Margin="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>

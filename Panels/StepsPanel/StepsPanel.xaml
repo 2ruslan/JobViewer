@@ -1,4 +1,5 @@
 ﻿<base:BaseUserControl x:Class="JobViewer.Panels.StepsPanel.StepsPanel"
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:base="clr-namespace:JobViewer.Base"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,37 +10,47 @@
              x:Name="ctrl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <GroupBox Grid.Row="0" Header="Steps">
+
+    <mah:MetroHeader Grid.Row="0" Margin="2"
+            mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                 mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
+                 Header="Steps">
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Column="0" Margin="4"
-                        AutoGenerateColumns="False" IsReadOnly="True"
+            <Border Grid.Column="0"  BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1">
+                <DataGrid  Margin="2"
+                        AutoGenerateColumns="False" 
+                        IsReadOnly="True" 
+                        SelectionMode="Single"
                         ItemsSource="{Binding Path=Steps}"
                         SelectedItem="{Binding Path=CurrentStep}"
                     >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Step" Binding="{Binding StepId}"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Success Step" Binding="{Binding OnSuccessStepId}"/>
-                    <DataGridTextColumn Header="Fail Step" Binding="{Binding OnFailStepId}"/>
-                    <DataGridTextColumn Header="Subsystem" Binding="{Binding Subsystem}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <GridSplitter Grid.Column="1"
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Step" Binding="{Binding StepId}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Success Step" Binding="{Binding OnSuccessStepId}"/>
+                        <DataGridTextColumn Header="Fail Step" Binding="{Binding OnFailStepId}"/>
+                        <DataGridTextColumn Header="Subsystem" Binding="{Binding Subsystem}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <GridSplitter Grid.Column="1" Width="2"
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"          
                     />
-            <avalonEditor:AvalonTextEditor  
+            <Border Grid.Column="2" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1">
+                <avalonEditor:AvalonTextEditor  Margin="2" 
                         x:Name="avalonEditCtrl"
-                        Grid.Column="2" Margin="4"
                         TextSql="{Binding Path=CurrentStep.Command}"
                         DefaultSchemaName="{Binding Path=CurrentStep.ShemaName}"
                         />
+            </Border>
         </Grid>
-    </GroupBox>
+    </mah:MetroHeader>
 
 </base:BaseUserControl>

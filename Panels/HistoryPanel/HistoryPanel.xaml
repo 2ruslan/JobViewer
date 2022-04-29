@@ -42,9 +42,11 @@
 
 
                 <DataGrid Grid.Row="1" Margin="4"
-                            AutoGenerateColumns="False" IsReadOnly="True"
-                            ItemsSource="{Binding History}"
-                            SelectedItem="{Binding CurrentStep}"
+                          AutoGenerateColumns="False" 
+                          IsReadOnly="True" 
+                          SelectionMode="Single"
+                          ItemsSource="{Binding History}"
+                          SelectedItem="{Binding CurrentStep}"
                         >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="RunDate" Binding="{Binding RunDateTime,StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}"/>

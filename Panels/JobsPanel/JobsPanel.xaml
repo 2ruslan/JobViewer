@@ -4,17 +4,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:JobViewer.Panels.JobsPanel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <GroupBox 
-                Header="Jobs"
-                Grid.Column="0" Margin="4">
-
-        <DataGrid Margin="4"
-                    ItemsSource="{Binding Jobs}"
-                    SelectedItem="{Binding CurrentJob}"
-                          AutoGenerateColumns="False"
+    <mah:MetroHeader Grid.Row="0" Margin="2"
+            mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                 mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
+                 Header="Jobs">
+        <Border  BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1">
+            <DataGrid Margin="2"
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True" 
+                  SelectionMode="Single"
+                  ItemsSource="{Binding Jobs}"
+                  SelectedItem="{Binding CurrentJob}"
                 >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}">
@@ -27,6 +31,7 @@
                 <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding IsEnabled, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
-    </GroupBox>
+        </Border>
+    </mah:MetroHeader>
 
 </base:BaseUserControl>
