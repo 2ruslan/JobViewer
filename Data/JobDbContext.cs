@@ -34,14 +34,13 @@ namespace JobViewer.Model
             try
             {
                 var dbRes = TextLines
-                    .FromSqlRaw($"use {dbName}; EXEC sp_helptext '{objName}';")
+                    .FromSqlRaw($"use {dbName};SELECT OBJECT_DEFINITION (OBJECT_ID('{objName}')) as Text;")
                     .ToList();
 
-                result = dbRes.Select(x => x.Text).Aggregate((a, b) => $"{a}{b}");
+                result = dbRes.Select(x => x.Text).FirstOrDefault();
             }
-            catch (Exception e)
+            catch 
             {
-                result = e.Message;
             }
             
             return result;

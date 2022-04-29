@@ -36,7 +36,6 @@
             <avalonEditor:AvalonTextEditor  
                         x:Name="avalonEditCtrl"
                         Grid.Column="2" Margin="4"
-                        JobDbContext="{Binding ElementName=ctrl, Path=JobDbContext}"
                         TextSql="{Binding Path=CurrentStep.Command}"
                         DefaultSchemaName="{Binding Path=CurrentStep.ShemaName}"
                         />

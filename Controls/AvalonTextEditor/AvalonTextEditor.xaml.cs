@@ -10,13 +10,15 @@ namespace JobViewer.AvalonTextEditor
 {
     public partial class AvalonTextEditor : UserControl
     {
-        public JobDbContext JobDbContext
+        protected ApplicationContext ApplicationContext
         {
-            get { return (JobDbContext)GetValue(JobDbContextProperty); }
-            set { SetValue(JobDbContextProperty, value); }
+            get
+            {
+                if (App.Current != null && App.Current is App app)
+                    return app.ApplicationContext;
+                return null;
+            }
         }
-        public static readonly DependencyProperty JobDbContextProperty =
-            DependencyProperty.Register("JobDbContext", typeof(JobDbContext), typeof(AvalonTextEditor));
 
         public String TextSql
         {
@@ -88,7 +90,7 @@ namespace JobViewer.AvalonTextEditor
 
         private void avalonEditCtrl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var delimiters = new char[] {' ', '\r', '\n', '\t' };
+            var delimiters = new char[] {' ', '\r', '\n', '\t', '(', ')' };
             var clockPos = avalonEditCtrl.SelectionStart;
             var last = TextSql.IndexOfAny(delimiters, clockPos);
             if (last == -1)
@@ -98,7 +100,7 @@ namespace JobViewer.AvalonTextEditor
             first = first == -1 ? 0 : first + 1;
 
             var candidate = TextSql.Substring(first, last - first +1).Trim(delimiters);
-
+            
             string sql = null;
             string objName = candidate;
             try
@@ -108,20 +110,20 @@ namespace JobViewer.AvalonTextEditor
                 var schema = parts[0].Trim();
                 objName = parts[1].Trim();
 
-                if (!JobDbContext.IsDataBase(schema))
+                if (!ApplicationContext.JobDbContext.IsDataBase(schema))
                 {
                     schema = DefaultSchemaName;
                     objName = candidate;
                 }
 
-                sql = JobDbContext.SpHelpText(schema, objName);
+                sql = ApplicationContext.JobDbContext.SpHelpText(schema, objName);
+                
+                if (!string.IsNullOrEmpty(sql))
+                    new DBObjectViewer(DefaultSchemaName, sql, objName).Show();
             }
-            catch (Exception ex)
+            catch 
             {
-                sql = ex.Message;
             }
-
-            new DBObjectViewer(DefaultSchemaName, sql, objName).Show();
         }
 
         private void OpenAsParam_Click(object sender, RoutedEventArgs e)

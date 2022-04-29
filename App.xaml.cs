@@ -26,11 +26,12 @@ namespace JobViewer
         {
             var connection = GetDbConnection();
             if (connection == null)
+            {
                 Application.Current.Shutdown(-1);
+                return;
+            }
 
             ApplicationContext = new ApplicationContext(new Messanger(), connection);
-
-
 
             ShowMainWindow();
         }
