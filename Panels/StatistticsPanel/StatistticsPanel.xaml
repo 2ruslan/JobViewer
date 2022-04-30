@@ -22,14 +22,14 @@
                                         StatisticInfo="{Binding Path=JobStatistic}"
                                         />
 
-        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="2"/>
 
         <stat:StatisticsPLotterView Grid.Column="2"
                                         Header="Steps avg"
                                         StatisticInfo="{Binding Path=JobStepAvgStatistic}"
                                         />
 
-        <GridSplitter Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <GridSplitter Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="2"/>
 
         <stat:StatisticsPLotterView Grid.Column="4"
                                         Header="Steps total"

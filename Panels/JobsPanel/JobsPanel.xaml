@@ -13,24 +13,12 @@
                  mah:HeaderedControlHelper.HeaderForeground="{DynamicResource MahApps.Brushes.Accent}"
                  Header="Jobs">
         <Border  BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1">
-            <DataGrid Margin="2"
-                  AutoGenerateColumns="False" 
-                  IsReadOnly="True" 
-                  SelectionMode="Single"
-                  ItemsSource="{Binding Jobs}"
-                  SelectedItem="{Binding CurrentJob}"
-                >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="ToolTip" Value="{Binding Description}" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                </DataGridTextColumn>
-                <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding IsEnabled, Mode=OneWay}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+            <ListBox
+                ItemsSource="{Binding Jobs}"
+                SelectedItem="{Binding CurrentJob}"
+                DisplayMemberPath="Name"
+                
+                />
         </Border>
     </mah:MetroHeader>
 
