@@ -29,13 +29,15 @@ namespace JobViewer.Panels.StatistticsPanel
 
             ApplicationContext?.Messanger
                 .Subscribe(typeof(MessageJobChanged), OnRecieveMessage);
+            ApplicationContext?.Messanger
+                .Subscribe(typeof(MessageStepChanged), OnRecieveMessage);
         }
 
         private void OnRecieveMessage(IMessage m)
         {
             if (m is MessageJobChanged msgJobCh)
                 viewModel.CreateJobStatistic(ApplicationContext.JobDbContext, msgJobCh.NewJob.JobId);
-            else if (m is MessageStepChanged msgStpCh)
+            else if (m is MessageStepChanged msgStpCh && msgStpCh.NewStep != null)
                 viewModel.CreateStepStatistic(ApplicationContext.JobDbContext, msgStpCh.NewStep.JobId, msgStpCh.NewStep.StepId);
         }
     }

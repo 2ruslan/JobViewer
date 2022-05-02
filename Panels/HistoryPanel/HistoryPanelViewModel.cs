@@ -86,6 +86,7 @@ namespace JobViewer.Panels.HistoryPanel
             History = new ObservableCollection<JobHistory>(
                     jobDbContext.JobHistory
                                             .Where(x => x.JobId == jobId)
+                                            .Take(500)
                                             .ToList()
                                             );
 
@@ -100,6 +101,7 @@ namespace JobViewer.Panels.HistoryPanel
             History = new ObservableCollection<JobHistory>(
                     GetHistory(jobDbContext.JobHistory
                                             .Where(x => x.JobId == jobId && x.StepId == stepID)
+                                            .Take(500)
                                             .ToList()
                                             ));
 

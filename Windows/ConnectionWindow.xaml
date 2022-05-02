@@ -70,9 +70,9 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="1" Margin="4"
-                Content="Cancel"  IsCancel="True" Width="75" DockPanel.Dock="Right"/>
-            <Button Grid.Column="2" Margin="4"
                 Content="Connect" IsDefault="True" Click="Connect_Click" Width="75" DockPanel.Dock="Right"/>
+            <Button Grid.Column="2" Margin="4"
+                Content="Cancel"  IsCancel="True" Width="75" DockPanel.Dock="Right"/>
         </Grid>
         
     </Grid>
